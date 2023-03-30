@@ -16,7 +16,7 @@ export const GameConstant = Object.freeze({
   SCENE_ENDCARD : "EndCard",
 
   SCREEN_LOADING  : "Loading",
-  SCREEN_SPIN     : "Spin",
+  SCREEN_SELECTPLAYER    : "SelectPlayer",
   SCREEN_TUTORIAL : "Tutorial",
   SCREEN_PLAY     : "Play",
   SCREEN_PAUSE    : "Pause",

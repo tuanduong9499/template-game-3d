@@ -3,6 +3,7 @@ import { GameConstant } from "../../gameConstant";
 import { Game } from "../../game";
 import { Color, Entity, LIGHTTYPE_DIRECTIONAL, PROJECTION_ORTHOGRAPHIC } from "playcanvas";
 import { Util } from "../../helpers/util";
+import { selectPlayerEvent, SelectPlayerScreen } from "../screens/selectPlayerScreen";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -13,8 +14,17 @@ export class PlayScene extends Scene {
     super.create();
 
     this.ui.addScreens(
-      //new SpinScreen()
+      new SelectPlayerScreen()
     );
+    this.ui.setScreenActive(GameConstant.SCREEN_SELECTPLAYER);
+
+    this.ui.children[0].on(selectPlayerEvent.player1_event, (player) => {
+      this.ui.disableAllScreens();
+    });
+
+    this.ui.children[0].on(selectPlayerEvent.player2_event, (player) => {
+      this.ui.disableAllScreens();
+    })
 
     this._initLight();
     this._initGameplay();
