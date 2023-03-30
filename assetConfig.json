@@ -1,0 +1,85 @@
+{
+  "inline": true,
+  "encrypt": false,
+  "paths": {
+    "RAW_ASSET_PATH": "assets",
+    "CRYPTION_CONFIG_FILE": "./src/cryptionConfig.js",
+    "ASSET_DATA_FILENAME": "assetData.json",
+    "BUILD_ASSET_PATH": "dist/assets"
+  },
+  "selectedPreset": 1,
+  "presets": [
+    {
+      "level": 0,
+      "audioConfig": {
+        "export": "mp3",
+        "format": "howler2",
+        "bitrate": 128,
+        "channels": 2,
+        "samplerate": 48000,
+        "log": "error"
+      },
+      "atlasConfig": {
+        "tool": "ftp",
+        "allowRotation": false,
+        "detectIdentical": true,
+        "allowTrim": false,
+        "alphaThreshold": 1,
+        "extrude": 4,
+        "powerOfTwo": true,
+        "width": 4096,
+        "height": 4096,
+        "jpgQuality": 90,
+        "pngOptLevel": 1
+      }
+    },
+    {
+      "level": 1,
+      "audioConfig": {
+        "export": "mp3",
+        "format": "howler2",
+        "bitrate": 96,
+        "channels": 2,
+        "samplerate": 44100,
+        "log": "error"
+      },
+      "atlasConfig": {
+        "tool": "ftp",
+        "allowRotation": false,
+        "detectIdentical": true,
+        "allowTrim": false,
+        "alphaThreshold": 1,
+        "extrude": 4,
+        "powerOfTwo": false,
+        "width": 2048,
+        "height": 2048,
+        "jpgQuality": 75,
+        "pngOptLevel": 2
+      }
+    },
+    {
+      "level": 2,
+      "audioConfig": {
+        "export": "mp3",
+        "format": "howler2",
+        "bitrate": 64,
+        "channels": 1,
+        "samplerate": 22050,
+        "log": "error"
+      },
+      "atlasConfig": {
+        "tool": "ftp",
+        "allowRotation": false,
+        "detectIdentical": true,
+        "allowTrim": true,
+        "alphaThreshold": 1,
+        "extrude": 4,
+        "powerOfTwo": false,
+        "width": 1024,
+        "height": 1024,
+        "jpgQuality": 50,
+        "pngOptLevel": 5
+      }
+    }
+  ]
+}

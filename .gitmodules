@@ -1,0 +1,4 @@
+[submodule "pureAds"]
+	path = pureAds
+	url = git@gitlab.com:pureative/submodules/pureAds.git
+

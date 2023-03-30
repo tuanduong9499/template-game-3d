@@ -1,0 +1,89 @@
+[
+  {
+    "position": [0, 0, 0],
+    "objects": [
+      {
+        "type": "container",
+        "position": [-1.8, 0, -3.7],
+        "config": {
+          "stacks": [
+            { "color": "blue" },
+            { "color": "black" },
+            { "color": "blue" }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "position": [-0.6, 0, -3.7],
+        "config": {
+          "stacks": [
+            { "color": "black" },
+            { "color": "blue" },
+            { "color": "green" }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "position": [0.6, 0, -3.7],
+        "config": {
+          "tutorialStep": 2,
+          "stacks": [
+            { "color": "green" },
+            { "color": "green" }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "position": [1.8, 0, -3.7],
+        "config": {
+          "stacks": [
+            { "color": "red" },
+            { "color": "red" },
+            { "color": "black" },
+            { "color": "red" }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "position": [-1.2, 0, 0],
+        "config": {
+          "stacks": [
+            { "color": "pink" },
+            { "color": "pink" },
+            { "color": "purple" },
+            { "color": "blue" }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "position": [0, 0, 0],
+        "config": {
+          "stacks": [
+            { "color": "purple" },
+            { "color": "purple" },
+            { "color": "red" },
+            { "color": "purple" }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "position": [1.2, 0, 0],
+        "config": {
+          "tutorialStep": 1,
+          "stacks": [
+            { "color": "pink" },
+            { "color": "pink" },
+            { "color": "black" },
+            { "color": "green" }
+          ]
+        }
+      }
+    ]
+  }
+]

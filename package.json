@@ -1,0 +1,40 @@
+{
+  "name": "pureative-3d",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "data": "node ./node_modules/@pureative/purebuild/builder.js --config assetConfig.json",
+    "start": "webpack serve --env env=dev --open",
+    "host": "webpack serve --env env=host --open",
+    "export": "webpack --env env=export",
+    "preview-upload": "webpack --env env=preview && aws s3 cp preview s3://abidn.space/template-3d --recursive --cache-control max-age=120 --acl public-read",
+    "export-upload": "webpack --env env=export && aws s3 cp dist/template-3d s3://abidn.space/template-3d --recursive --cache-control max-age=120 --acl public-read"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/preset-env": "^7.17.10",
+    "archiver": "^5.3.1",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^10.2.4",
+    "esbuild-loader": "^2.19.0",
+    "eslint": "^8.15.0",
+    "html-inline-script-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "ip": "^1.1.8",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0",
+    "webpack-merge": "^5.8.0",
+    "@pureative/purebuild": "gitlab:pureative/submodules/purebuild#semver:1.3.5"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^18.6.4",
+    "base64-arraybuffer": "^1.0.2",
+    "howler": "^2.2.3",
+    "playcanvas": "^1.53.4"
+  }
+}
