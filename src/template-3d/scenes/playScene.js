@@ -4,6 +4,7 @@ import { Game } from "../../game";
 import { Color, Entity, LIGHTTYPE_DIRECTIONAL, PROJECTION_ORTHOGRAPHIC } from "playcanvas";
 import { Util } from "../../helpers/util";
 import { selectPlayerEvent, SelectPlayerScreen } from "../screens/selectPlayerScreen";
+import { Player } from "../objects/player/player";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -16,7 +17,7 @@ export class PlayScene extends Scene {
     this.ui.addScreens(
       new SelectPlayerScreen()
     );
-    this.ui.setScreenActive(GameConstant.SCREEN_SELECTPLAYER);
+    //this.ui.setScreenActive(GameConstant.SCREEN_SELECTPLAYER);
 
     this.ui.children[0].on(selectPlayerEvent.player1_event, (player) => {
       this.ui.disableAllScreens();
@@ -87,6 +88,7 @@ export class PlayScene extends Scene {
 
   _initGameplay() {
     this._initCamera();
+    this._initPlayer();
   }
 
   _initCamera() {
@@ -100,5 +102,10 @@ export class PlayScene extends Scene {
 
     this.mainCamera.setLocalPosition(0, 13.2, 15.6);
     this.mainCamera.setLocalEulerAngles(-36, 0, 0);
+  }
+
+  _initPlayer(){
+    this.player = new Player();
+    this.addChild(this.player);
   }
 }

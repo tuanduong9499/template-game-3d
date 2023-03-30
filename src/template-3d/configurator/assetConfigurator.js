@@ -14,6 +14,18 @@ export class AssetConfigurator {
     this._configContainer();
     this._configStack();
     this._configSprites();
+    this._configPlayer();
+  }
+
+  static _configPlayer(){
+    let matBodyPlayer =  new StandardMaterial();
+    let matClothesPlayer = new StandardMaterial();
+    matClothesPlayer.diffuseMap = AssetManager.find("Erika_Archer_Clothes_diffuse").resource;
+    matBodyPlayer.diffuseMap = AssetManager.find("FemaleFitA_Body_diffuse").resource;
+    this.setModelMaterial("character1", matBodyPlayer, 0);
+    this.setModelMaterial("character1", matClothesPlayer, 1);
+    this.setModelMaterial("character1", matClothesPlayer, 2);
+    this.setModelMaterial("character1", matBodyPlayer, 3);
   }
 
   static _configContainer() {
