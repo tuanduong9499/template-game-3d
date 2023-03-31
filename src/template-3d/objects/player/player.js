@@ -8,7 +8,7 @@ export class Player extends Entity{
   }
 
   _initModel(){
-    this.model = ObjectFactory.createModel("character1", );
+    this.model = ObjectFactory.createModel("character1");
     this.addChild(this.model);
   }
 }

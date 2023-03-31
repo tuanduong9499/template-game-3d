@@ -5,6 +5,7 @@ import { Color, Entity, LIGHTTYPE_DIRECTIONAL, PROJECTION_ORTHOGRAPHIC } from "p
 import { Util } from "../../helpers/util";
 import { selectPlayerEvent, SelectPlayerScreen } from "../screens/selectPlayerScreen";
 import { Player } from "../objects/player/player";
+import { Ground } from "../objects/ground/ground";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -89,6 +90,7 @@ export class PlayScene extends Scene {
   _initGameplay() {
     this._initCamera();
     this._initPlayer();
+    this._initGround();
   }
 
   _initCamera() {
@@ -107,5 +109,11 @@ export class PlayScene extends Scene {
   _initPlayer(){
     this.player = new Player();
     this.addChild(this.player);
+  }
+
+  _initGround(){
+    this.ground = new Ground();
+    this.addChild(this.ground);
+    this.ground.setLocalScale(10, 10, 10);
   }
 }
