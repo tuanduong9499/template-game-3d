@@ -7,6 +7,7 @@ export const Animator = Script.createScript({
   name       : "animator",
   attributes : {
     animation: {},
+    loop     : {default: false}
   },
 
   currIndex   : 0,
@@ -17,7 +18,7 @@ export const Animator = Script.createScript({
 
   initialize() {
     this.anims = this.getAnims();
-    this.animation.loop = false;
+    this.animation.loop = this.loop;
   },
 
   update() {

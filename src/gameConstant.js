@@ -29,7 +29,7 @@ export const GameConstant = Object.freeze({
   STACK_START_Y : 0.42,
   STACK_MARGIN  : 0.3,
 
-  CONTAINER_COLLIDER_RENDER : false,
+  CONTAINER_COLLIDER_RENDER : true,
   CONTAINER_PICKUP_Y        : 1.6,
   TOUCH_MOVE_THRESHOLD      : 5,
 

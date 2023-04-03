@@ -34,5 +34,6 @@ export const Raycast = Script.createScript({
     this.ray.direction.sub(this.ray.origin).normalize();
 
     this.fire(RaycastEvent.Cast, this.ray);
+    
   },
 });

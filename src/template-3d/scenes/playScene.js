@@ -6,6 +6,10 @@ import { Util } from "../../helpers/util";
 import { selectPlayerEvent, SelectPlayerScreen } from "../screens/selectPlayerScreen";
 import { Player } from "../objects/player/player";
 import { Ground } from "../objects/ground/ground";
+import { Obstacle } from "../objects/obstacle/obstacle";
+import { Map } from "../objects/map/map";
+import { Raycast, RaycastEvent } from "../scripts/raycast/raycast";
+import { InputHandler, InputHandlerEvent } from "../scripts/input/inputHandler";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -88,8 +92,12 @@ export class PlayScene extends Scene {
   }
 
   _initGameplay() {
+    this._initInputHandler();
     this._initCamera();
     this._initPlayer();
+    this._initMap();
+    this._registerKeyDownEvent();
+    this._registerKeyUpEvent();
     this._initGround();
   }
 
@@ -106,6 +114,13 @@ export class PlayScene extends Scene {
     this.mainCamera.setLocalEulerAngles(-36, 0, 0);
   }
 
+  _initInputHandler() {
+    let inputHandlerEntity = new Entity("input");
+    this.inputHandler = inputHandlerEntity.addScript(InputHandler);
+    this.inputHandler.enabled = true;
+    this.addChild(inputHandlerEntity);
+  }
+
   _initPlayer(){
     this.player = new Player();
     this.addChild(this.player);
@@ -115,5 +130,52 @@ export class PlayScene extends Scene {
     this.ground = new Ground();
     this.addChild(this.ground);
     this.ground.setLocalScale(10, 10, 10);
+  }
+
+  _initMap(){
+    this.map = new Map();
+    this.addChild(this.map);
+  }
+
+  _registerKeyDownEvent(){
+    document.addEventListener("keydown", (e) => {
+      this.player.walk();
+      switch (e.code) {
+        case "KeyW":
+          this.player.velocityZ = -0.02;
+          this.player.rotationPlayer(e.code);
+          break;
+        case "KeyA":
+          this.player.velocityX = -0.02;
+          this.player.rotationPlayer(e.code);
+          break;
+        case "KeyS":
+          this.player.velocityZ = 0.02;
+          this.player.rotationPlayer(e.code);
+          break;
+        case "KeyD":
+          this.player.velocityX = 0.02;
+          this.player.rotationPlayer(e.code);
+          break;
+              
+        default:
+          break;
+      }
+    })
+  }
+
+  _registerKeyUpEvent(){
+    document.addEventListener("keyup", () => {
+      this.player.state = "idle";
+      this.player.velocityX = 0;
+      this.player.velocityY = 0;
+      this.player.velocityZ = 0;
+      this.player.idle()
+
+    })
+  }
+
+  update(){
+    this.player.update();
   }
 }
