@@ -9,7 +9,7 @@ export class Physics {
     CollisionDetector.instance.init([
       {
         tag         : CollisionTag.Player,
-        collideTags : [CollisionTag.MapObject],
+        collideTags : [CollisionTag.MapObject, CollisionTag.Food],
       },
     ]);
 

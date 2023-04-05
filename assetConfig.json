@@ -7,7 +7,7 @@
     "ASSET_DATA_FILENAME": "assetData.json",
     "BUILD_ASSET_PATH": "dist/assets"
   },
-  "selectedPreset": 1,
+  "selectedPreset": 0,
   "presets": [
     {
       "level": 0,

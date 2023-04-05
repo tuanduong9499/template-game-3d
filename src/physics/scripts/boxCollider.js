@@ -30,5 +30,5 @@ export const BoxCollider = Script.createScript({
 
   getBound() {
     return this.box.model.meshInstances[0].aabb;
-  },
+  }, 
 });

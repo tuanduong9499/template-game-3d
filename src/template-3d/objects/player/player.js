@@ -23,13 +23,12 @@ export class Player extends Entity{
     this.initModel("character1", anims);
     this.boxCollider = this.addScript(BoxCollider, {
       tag: CollisionTag.Player,
-      position: this.getLocalPosition(),
-      scale: new Vec3(1, 1, 1),
-      render: true
+      position: this.model.getLocalPosition(),
+      scale: new Vec3(0.5, 1, 0.5),
     });
 
     this.boxCollider.on(CollisionEvent.OnCollide, () => {
-      console.log(12)
+      
     });
   }
 

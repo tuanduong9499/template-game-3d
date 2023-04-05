@@ -10,6 +10,10 @@ import { Obstacle } from "../objects/obstacle/obstacle";
 import { Map } from "../objects/map/map";
 import { Raycast, RaycastEvent } from "../scripts/raycast/raycast";
 import { InputHandler, InputHandlerEvent } from "../scripts/input/inputHandler";
+import { PlayScreen } from "../screens/playSCreen";
+import { FoodManager, foodCollideEvent } from "../objects/food/foodManager";
+import { WinScreen } from "../screens/winScreen";
+import { LoseScreen } from "../screens/loseScreen";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -20,17 +24,31 @@ export class PlayScene extends Scene {
     super.create();
 
     this.ui.addScreens(
-      new SelectPlayerScreen()
+      new SelectPlayerScreen(),
+      new PlayScreen(),
+      new WinScreen(),
+      new LoseScreen(),
     );
-    //this.ui.setScreenActive(GameConstant.SCREEN_SELECTPLAYER);
-
-    this.ui.children[0].on(selectPlayerEvent.player1_event, (player) => {
-      this.ui.disableAllScreens();
+    this.ui.setScreenActive(GameConstant.SCREEN_SELECTPLAYER);
+    console.log(this.ui.screens)
+    let selectPlayerScreen = this.ui.getScreen("SelectPlayer");
+    selectPlayerScreen.on(selectPlayerEvent.player2_event, (player) => {
+      this.ui.setScreenActive(GameConstant.SCREEN_PLAY);
+      this.ui.disableScreen("SelectPlayer");
+      let playScreen = this.ui.getScreen("Play");
+      playScreen.isStart = true;
+      playScreen.once("loss", () => {
+        this._onLose();
+        this.ui.setScreenActive(GameConstant.SCREEN_LOSE);
+        this.ui.disableScreen("Play");
+      });
+      playScreen.once("win", () => {
+        this._onWin();
+        this.ui.setScreenActive(GameConstant.SCREEN_WIN);
+        this.ui.disableScreen("Play");
+      })
     });
-
-    this.ui.children[0].on(selectPlayerEvent.player2_event, (player) => {
-      this.ui.disableAllScreens();
-    })
+    //this.ui.setScreenActive(GameConstant.SCREEN_LOSE);
 
     this._initLight();
     this._initGameplay();
@@ -94,11 +112,13 @@ export class PlayScene extends Scene {
   _initGameplay() {
     this._initInputHandler();
     this._initCamera();
-    this._initPlayer();
     this._initMap();
+    this._initPlayer();
     this._registerKeyDownEvent();
     this._registerKeyUpEvent();
     this._initGround();
+    this._initFoodManager();
+    
   }
 
   _initCamera() {
@@ -129,7 +149,7 @@ export class PlayScene extends Scene {
   _initGround(){
     this.ground = new Ground();
     this.addChild(this.ground);
-    this.ground.setLocalScale(10, 10, 10);
+    this.ground.setLocalScale(10, 1, 30);
   }
 
   _initMap(){
@@ -142,19 +162,19 @@ export class PlayScene extends Scene {
       this.player.walk();
       switch (e.code) {
         case "KeyW":
-          this.player.velocityZ = -0.02;
+          this.player.velocityZ = -0.04;
           this.player.rotationPlayer(e.code);
           break;
         case "KeyA":
-          this.player.velocityX = -0.02;
+          this.player.velocityX = -0.04;
           this.player.rotationPlayer(e.code);
           break;
         case "KeyS":
-          this.player.velocityZ = 0.02;
+          this.player.velocityZ = 0.04;
           this.player.rotationPlayer(e.code);
           break;
         case "KeyD":
-          this.player.velocityX = 0.02;
+          this.player.velocityX = 0.04;
           this.player.rotationPlayer(e.code);
           break;
               
@@ -175,7 +195,25 @@ export class PlayScene extends Scene {
     })
   }
 
-  update(){
+  _initFoodManager(){
+    this.foodManager = new FoodManager();
+    this.addChild(this.foodManager);
+
+
+    this.foodManager.on(foodCollideEvent.collide, () => {
+      this.ui.screens.forEach(screen => {
+        if(screen.key === "Play"){
+          screen.updateSCore();
+          screen.updateTime();
+        }
+      })
+    })
+
+  }
+
+  update(dt){
     this.player.update();
+    this.foodManager.update();
+    this.ui.screens[1].update(dt);
   }
 }

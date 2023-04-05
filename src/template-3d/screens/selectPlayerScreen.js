@@ -1,4 +1,4 @@
-import { Color, Vec4 } from "playcanvas";
+import { Color, Vec4, log } from "playcanvas";
 import { Game } from "../../game";
 import { GameConstant } from "../../gameConstant";
 import { Util } from "../../helpers/util";
@@ -24,7 +24,7 @@ export class SelectPlayerScreen extends UIScreen{
   }
 
   _initBackground(){
-    let color = Util.createColor(166, 166, 166);
+    let color = Util.createColor(50, 50, 50);
     this.bg = ObjectFactory.createColorBackground(color);
     this.addChild(this.bg);
   }
@@ -33,13 +33,14 @@ export class SelectPlayerScreen extends UIScreen{
     this.group = ObjectFactory.createGroupElement();
     this.addChild(this.group);
     this.group.element.anchor.set(0.5, 0.5, 0.5, 0.5);
-    this.group.element.width = Game.width;
-    this.group.element.height = Game.height;
+    this.group.element.width = 400;
+    this.group.element.height = 720;
   }
 
   _initSpritePlayer1(){
     this.player1 = ObjectFactory.createImageElement("spr_player1");
-    this.player1.element.anchor.set(0.1, 0.5, 0.1, 0.5);
+    this.player1.element.anchor.set(0.5, 0.4, 0.5, 0.4);
+    this.player1.setLocalPosition(-200, 0, 0)
     this.group.addChild(this.player1);
     this.player1ScaleTween = Tween.createScaleTween(this.player1, {x: 1.2, y: 1.2}, {
       duration : 1,
@@ -55,8 +56,12 @@ export class SelectPlayerScreen extends UIScreen{
 
   _initSpritePlayer2(){
     this.player2 = ObjectFactory.createImageElement("spr_player2");
-    this.player2.element.anchor.set(0.9, 0.5, 0.9, 0.5);
+    this.player2.element.anchor.set(0.5, 0.4, 0.5, 0.4);
+    this.player2.setLocalPosition(200 , 0, 0)
+    console.log(this.player2.element.anchor)
     this.group.addChild(this.player2);
+    console.log(this.player2.getLocalPosition())
+
     this.player2ScaleTween = Tween.createScaleTween(this.player2, {x: 1.2, y: 1.2}, {
       duration : 1,
       loop     : true,
@@ -75,9 +80,9 @@ export class SelectPlayerScreen extends UIScreen{
 
   _initHand(){
     this.hand = ObjectFactory.createImageElement("spr_hand");
-    this.hand.setLocalPosition(-100, -150, 0);
+    this.hand.setLocalPosition(this.player1.getLocalPosition().x , -200, 0);
     this.group.addChild(this.hand);
-    Tween.createLocalTranslateTween(this.hand, {x:  100},{
+    Tween.createLocalTranslateTween(this.hand, {x:  this.player2.getLocalPosition().x},{
       duration: 1,
       loop: true,
       yoyo: true,
@@ -85,21 +90,19 @@ export class SelectPlayerScreen extends UIScreen{
   }
 
   _initTagLine(){
-    this.tagLine = ObjectFactory.createImageElement("spr_spin_tagline");
+    this.tagLine = ObjectFactory.createImageElement("spr_select_player");
     this.group.addChild(this.tagLine);
-    this.tagLine.element.anchor.set(0.5, 1, 0.5, 1)
+    this.tagLine.setLocalScale(1.5, 1.5, 1.5)
+    this.tagLine.element.anchor.set(0.5, 0.9, 0.5, 0.9)
   }
 
   resize(){
     super.resize();
     if(Game.isPortrait){
-      this.player1.element.anchor.set(0.1, 0.5, 0.1, 0.5);
-      this.player2.element.anchor.set(0.9, 0.5, 0.9, 0.5);
+      this.group.element.anchor.set(0.5, 0.5, 0.5, 0.5);
     }
     else{
-      console.log(1)
-      this.player1.element.anchor.set(0.1, 0.7, 0.1, 0.7);
-      this.player2.element.anchor.set(0.9, 0.7, 0.9, 0.7);
+      this.group.element.anchor.set(0.5, 0.5, 0.5, 0.5);
     }
   }
 }

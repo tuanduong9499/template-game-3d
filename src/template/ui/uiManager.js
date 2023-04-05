@@ -56,6 +56,14 @@ export class UIManager extends Entity {
     }
   }
 
+  disableScreen(key){
+    this.screens.forEach((screen) => {
+      if(screen.key === key){
+        screen.enabled = false;
+      }
+    })
+  }
+
   disableAllScreens() {
     this.screens.forEach((screen) => screen.enabled = false);
   }

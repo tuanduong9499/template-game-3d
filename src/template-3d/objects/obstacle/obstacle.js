@@ -22,7 +22,6 @@ export class Obstacle extends Entity {
       tag: CollisionTag.MapObject,
       position: this.obstacle.getLocalPosition(),
       scale: new Vec3(1, 1, 1),
-      render: true
     })
   }
 }
